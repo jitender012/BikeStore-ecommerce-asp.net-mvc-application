@@ -1,58 +1,241 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <link href="~/CustomCSS/layoutSS.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <title>bikestore.com</title>
+
+    <style>
+        #navbarNavDarkDropdown .navbar-nav .fa {
+            padding: 12px 0px 0px 21px;
+        }
+        dropdownMenuButton {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .show .dropdown-menu {
+            max-height: 500px; /* Adjust the value to your preference */
+            opacity: 1;
+        }
+        .cls6565 {
+            color: #ff6565;
+            font-size: 22px;
+            text-decoration:none;
+        }
+
+        .nav-item {
+            margin-right: 13px;
+        }
+        .nav-link {
+            border-bottom: 3px solid #212529;
+            
+        }
+        .active {
+            border-bottom: 3px solid #ff6565;
+        }
+        .nav-link:hover {
+            border-bottom: 3px solid #ffaaaa;
+        }
+    </style>
+
 </head>
-<body>
-    <div><nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">                  
-                    @Html.ActionLink("Home", "Index", "Home", new { @class= "nav-link active" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link active" })
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Resources
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Colours</a></li>
-                        <li><a class="dropdown-item" href="#">Links</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Forms</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav></div>
-    <div class="container body-content">
+<body style="font-family:Verdana">
+    <header>
+        <nav class="navbar navbar-expand-lg " style="background-color: #212529">
+            <div class="container-fluid ">
+
+                <a class="cls6565  " style="" href="/Home/Home"><b>BIKE STORE</b></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars fa-lg" style="color: #ff6565;"></i>
+                </button>
+
+                <div class="offcanvas offcanvas-end" id="offcanvasNavbar" tabindex="-1" labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header ">
+
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body bg-dark" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                            <li class="nav-item">
+                                <i class="fa fa-home fa-lg" style="color:white"></i>
+                                @Html.ActionLink("Home", "Home", "Home", null, new { id = "menuHome", style = "color:white;", @class = "nav-link d-inline", aria_current = "page" })
+                            </li>
+                            <li class="nav-item">
+                                <i class="fa fa-address-book fa-lg" style="color:white"></i>
+                                @Html.ActionLink("About", "About", "Home", null, new { onclick = "toggleMenu(this)", id = "menuAbout", style = "color:white;", @class = "nav-link d-inline", aria_current = "page" })
+                            </li>
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("admin"))
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle " style="color:white;" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Manage
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton" id="ddmenu">
+
+                                            <li>
+                                                @Html.ActionLink("Products", "AllProducts", "Product", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Brands", "Index", "Brand", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Categories", "AllCategory", "Category", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Stock", "Index", "Stock", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                @Html.ActionLink("Staff", "Index", "Staff", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Stores", "Index", "Store", null, new { @class = "dropdown-item" })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Customers", "Index", "Customers", null, new { @class = "dropdown-item" })
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+
+                        <li>
+                            @*<a id="menuProfile" style="color:white;" class="nav-link" href="/Customer/CustomerProfile"></a>*@
+                            <i class="fa-solid fa-user " style="color: #ffffff;"></i>
+                            @Html.ActionLink("User", "CustomerProfile", "Customer", new { email = User.Identity.Name }, new { style = "color:white; display:inline-block", @class = "  nav-link", id = "menuProfile" })
+                            <input type="hidden" value="@User.Identity.Name" id="cemail" />
+                        </li>
+
+                                <li>
+                                    @Html.ActionLink("Logout", "#", null, new { style = "color:white;", data_toggle = "modal", data_target = "#messageModal", @class = "nav-link" })
+                                </li>
+
+                            }
+                            else
+                            {
+                                <i class="fa fa-user fa-lg" style="color:white"></i>
+                                <li class="nav-item" )>
+                                    @Html.ActionLink("Login", "Login", "Customer", null, new { id = "menuLogin", style = "color:white;", @class = "nav-link " })
+                                </li>
+                                @*<li class="" )>
+                                        @Html.ActionLink("Signup", "Create", "Customer", null, new { @class = "nav-link active", aria_current = "page" })
+                                    </li>*@
+                            }
+                        </ul>
+                        @using (Html.BeginForm("Home", "Home", FormMethod.Get, new { @class = "d-flex", role = "search" }))
+                        {
+                            @Html.TextBox("search", null, new { placeholder = "Search", @class = "form-control  me-2" })
+                            <button class="btn btn-success" style="background-color: #ff6565; border:none" type="submit">Search</button>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid body-content " style="margin-top:-10px; padding-left: 0px; padding-right: 0px;">
         @RenderBody()
         <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year -My Bike Store</p>
         </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <!-- Your message content here -->
+                    Do you really want to logout?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " style="background-color: #212529; color:white " data-dismiss="modal">No</button>
+                    @Html.ActionLink("Yes", "Logout", "Customer", null, new { id = "log_out", @class = "btn", style = "background-color: #ff6565" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            $(document).ready(function () {
+                var em = $("#cemail").val();    
+                $.ajax({
+                    url: "/Customer/GetCustomerName",
+                    method: "GET",
+                    data: { email: em },
+                    success: function (data) {                     
+                        var anchorTag = document.getElementById("menuProfile");
+                        anchorTag.textContent = data;
+                    },
+                    error: function () {
+                        var anchorTag = document.getElementById("menuProfile");
+                        anchorTag.textContent = "Hello User";
+                    }
+                })
+            })
+        </script>
+
+    }
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tbllist').DataTable({
+
+            });
+        });
+
+
+
+
+        $(document).ready(function () {
+            // Get the current URL path
+            var path = window.location.pathname;
+
+            // Add 'active' class to the corresponding menu item
+            if (path === "/") {
+                $("#menuHome").addClass("active");
+            } else if (path === "/Home/About") {
+                $("#menuAbout").addClass("active");
+            } else if (path === "/Customer/Login") {
+                $("#menuLogin").addClass("active");
+            } else if (path === "/Customer/CustomerProfile") {
+                $("#menuProfile").addClass("active");
+            }
+
+        });
+
+        function toggleMenu(a) {
+            a.addClass("active");
+        }
+    </script>
 </body>
 </html>

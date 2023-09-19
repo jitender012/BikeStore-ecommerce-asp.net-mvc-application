@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BikeStoreModels.productModel>
+<style>
+    #cardimg {
+        cursor: pointer;
+    }
+
+        #cardimg:hover {
+            border: 4px solid white;
+        }
+</style>
+<h1>@TempData["em"]</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        <h2>logged in</h2>
+    </div>
+}
+<section style="width:100%; background-color: #eee;">
+    <div class="container py-3">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-8 col-lg-6 col-xl-4 mb-4">
+                    <div class="card text-black">
+                        <i class="fa fa-heart-o fa-lg pt-3 pb-1 px-3"></i>
+                        <a href="~/Home/View/@item.product_id"><img id="cardimg" src="@item.url" class="card-img-top" height="260" alt="Apple Computer" /></a>
+                        <div class="card-body">
+                            <div>
+
+                                <p class="text-muted ">@item.product_name</p>
+                            </div>
+                            <div>
+                                <p class="text-muted">Model Year: @item.model_year</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                                <span>Price</span><span>@item.list_price</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

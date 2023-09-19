@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @*<a href="~/Views/Shared/_Layout.cshtml">~/Views/Shared/_Layout.cshtml</a>*@
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Temp1</title>
+
+</head>
+<body>
+    <div>
+        <h2 id="id"></h2>
+        <h2 id="name"></h2>
+        <button onclick="BtnClick()">Hello</button>
+    </div>
+
+    <script>
+        function BtnClick() {
+            alert("hi")
+            js.ajax({
+                url: "/TemproryController/GetStudent",
+                method: "GET",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿body{
+    background-color:rebeccapurple;
+}
+.textbox {
+    width: 400px;
+    border: unset cornflowerblue;
+    border-radius: 3px;
+    border-color: #212529;
+    margin-bottom: 4px;
+    padding: 12px 20px;
+    border-left: 2px solid #ff6565;
+    border-right: 2px solid #ff6565;
+}

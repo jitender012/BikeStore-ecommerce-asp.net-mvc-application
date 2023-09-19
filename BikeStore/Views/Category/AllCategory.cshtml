@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BikeStoreModels.categoryModel>
+
+@{
+    ViewBag.Title = "AllCategory";
+}
+
+<h2>AllCategory</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create","",new {@class= "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.category_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.category_name)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.category_id , }, new { @class = "btn btn-outline-primary", style="width:70px" }) 
+        @Html.ActionLink("Details", "Details", new { id = item.category_id, }, new { @class = "btn btn-outline-success", style = "width:70px" }) 
+        @Html.ActionLink("Delete", "Delete", new { id = item.category_id, }, new { @class = "btn btn-outline-danger", style = "width:70px" })
+    </td>
+</tr>
+}
+
+</table>

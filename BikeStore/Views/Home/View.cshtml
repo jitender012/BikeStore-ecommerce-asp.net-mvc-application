@@ -1,0 +1,232 @@
+﻿@model BikeStoreModels.productModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+
+                    <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@Model.url" />
+
+                </div>
+                <div @*class="d-flex justify-content-center mb-3"*@>
+                    @*<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" class="item-thumb">
+                            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" class="item-thumb">
+                            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp" class="item-thumb">
+                            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big4.webp" class="item-thumb">
+                            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big4.webp" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" class="item-thumb">
+                            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+                        </a>*@
+                </div>
+                <!-- thumbs-wrap.// -->
+                <!-- gallery-wrap .end// -->
+            </aside>
+            <main class="col-lg-6" style="border: 1px solid #e1e1e1; border-radius:6px">
+                <div class="ps-lg-3">
+                    <h4 class="title text-dark">
+                        @Model.product_name
+                    </h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-1">
+                                4.5
+                            </span>
+                        </div>
+                        <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
+                        <span class="text-success ms-2">In stock</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="h5">$@Model.list_price</span>
+                        <span class="text-muted"></span>
+                    </div>
+
+                    <p>
+                        @Model.description
+
+                    </p>
+                    <p>
+                        @Model.model_year  |  @Model.brand.brand_name  | @Model.category.category_name
+                    </p>
+                    <div class="row">
+                        @*<dt class="col-3">Type:</dt>
+                            <dd class="col-9">Regular</dd>
+
+                            <dt class="col-3">Color</dt>
+                            <dd class="col-9">Brown</dd>
+
+                            <dt class="col-3">Material</dt>
+                            <dd class="col-9">Cotton, Jeans</dd>
+
+                            <dt class="col-3">Brand</dt>
+                            <dd class="col-9">Reebook</dd>*@
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-4">
+                        <!-- col.// -->
+                        <div class="col-md-4 col-6 mb-3">
+                            <label class="mb-2 d-block">Quantity</label>
+                            <div class="input-group mb-3" style="width: 170px;">
+                                <button onclick="setQuantity(-1)" class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <input type="text" id="qvalue" class="form-control text-center border border-secondary" value="1" placeholder="1 " aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                                <button onclick="setQuantity(1)" class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-warning shadow-0"> Buy now </a>
+                    <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                    <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                </div>
+                <br />
+                <div>
+                    <div class="row" style="border-bottom: 1px solid #e1e1e1; border-top: 1px solid #e1e1e1; ">
+                        <h4>Questions and Answers</h4>
+                    </div>
+
+                    <div>
+                        <br />
+                        <input type="hidden" id="productId" placeholder="" value="@Model.product_id" />
+                        <div id="dataContainer" "></div>
+
+                    </div>
+
+
+                    <div class="row">
+                        @*@using (Ajax.BeginForm("Create", new AjaxOptions() {OnSuccess = "fnSuccess", OnFailure = "fnFailure", HttpMethod="POST"}))
+                                    {
+                                        Html.TextAreaFor()
+                                <input type="submit" class="btn btn-success" />
+                            }*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form>
+                                <input type="text" id="qusText" placeholder="Ask question" />
+                                <input type="hidden" id="productId" placeholder="" value="@Model.product_id" />
+                                <input type="hidden" id="customerId" placeholder="" value="@User.Identity.Name" />
+                                <input type="hidden" id="datetime" placeholder="" value="@DateTime.Now" />
+                                <input type="submit" value="Submit" onclick="getQusInput()" />
+
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/QandA/GetQus",
+            method: "GET",
+            success: function (data) {
+                data = JSON.parse(data);
+                displayData(data);
+            },
+            error: function () {
+                alert("Error")
+            }
+        })
+    })
+
+    function displayData(data) {
+        var p_id = $("#productId").val();
+        var p_id2 = parseInt(p_id)
+        var isTrue = false;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].p_id == p_id2) {
+                isTrue = true
+            }
+        }
+        if (isTrue) {
+            var container = $("#dataContainer");
+            data.forEach(function (item) {
+                if (item.p_id == p_id2) {
+                    var listItem = $("<div>");
+                    listItem.text("Q: " + item.qus_text);
+                    container.append(listItem);
+                }
+        });
+        }        
+    }
+    //function displayData(data) {       
+    //    var container = $("#dataContainer");
+    //    data.forEach(function (item) {
+    //        var listItem = $("<div>");
+    //        listItem.text("Q: " + item.qus_text);
+    //        container.append(listItem);
+    //    });
+    //}
+
+    function getQusInput() {
+
+        var qtext = $("#qusText").val();
+        var cemail = $("#customerId").val();
+        var pid = $("#productId").val();
+        var dnt = $("#datetime").val();
+
+        var obj = {
+            qus_text: qtext,
+            c_email: cemail,
+            p_id: pid,
+            date: dnt
+        }
+        addQuestion(obj);
+    }
+
+    function addQuestion(obj) {
+        $.ajax({
+            url: "/QandA/AddQus",
+            method: "POST",
+            data: obj,
+            success: function (data) {
+                alert("Question added.");
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        })
+    }
+
+    function setQuantity(a) {
+        var qvalue = document.getElementById("qvalue")
+        var iqvalue = parseInt(qvalue.value);
+        var fvalue = iqvalue + a;
+        qvalue.value = fvalue;
+        if (fvalue < 1) {
+            qvalue.value = 1;
+        }
+        if (fvalue > 5) {
+            qvalue.value = 5;
+        }
+
+    }
+
+</script>
